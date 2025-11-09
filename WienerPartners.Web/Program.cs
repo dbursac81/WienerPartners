@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddBlazorBootstrap();
 
 // Configuration & DB
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);

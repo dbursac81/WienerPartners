@@ -10,6 +10,8 @@
   <ItemGroup>
     <ProjectReference Include="..\WienerPartners.Core\WienerPartners.Core.csproj" />
     <ProjectReference Include="..\WienerPartners.Data\WienerPartners.Data.csproj" />
+    <PackageReference Include="Azure.Identity" Version="1.17.0" />
+    <PackageReference Include="Blazor.Bootstrap" Version="3.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
   </ItemGroup>
 
