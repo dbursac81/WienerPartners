@@ -1,0 +1,56 @@
+@page "/create-partner"
+@inherits CreatePartnerBase
+
+<Shared.NavMenu />
+
+<h4>Unos novog partnera</h4>
+
+<EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label>FirstName</label>
+        <InputText class="form-control" @bind-Value="Model.FirstName" />
+    </div>
+    <div class="form-group">
+        <label>LastName</label>
+        <InputText class="form-control" @bind-Value="Model.LastName" />
+    </div>
+    <div class="form-group">
+        <label>Address</label>
+        <InputText class="form-control" @bind-Value="Model.Address" />
+    </div>
+    <div class="form-group">
+        <label>PartnerNumber (20 digits)</label>
+        <InputText class="form-control" @bind-Value="Model.PartnerNumber" />
+    </div>
+    <div class="form-group">
+        <label>CroatianPIN (OIB)</label>
+        <InputText class="form-control" @bind-Value="Model.CroatianPIN" />
+    </div>
+    <div class="form-group">
+        <label>PartnerTypeId</label>
+        <InputNumber class="form-control" @bind-Value="Model.PartnerTypeId" />
+        <small>1 - Personal, 2 - Legal</small>
+    </div>
+    <div class="form-group">
+        <label>CreateByUser (email)</label>
+        <InputText class="form-control" @bind-Value="Model.CreateByUser" />
+    </div>
+    <div class="form-group form-check">
+        <InputCheckbox class="form-check-input" @bind-Value="Model.IsForeign" />
+        <label class="form-check-label">IsForeign</label>
+    </div>
+    <div class="form-group">
+        <label>ExternalCode</label>
+        <InputText class="form-control" @bind-Value="Model.ExternalCode" />
+    </div>
+    <div class="form-group">
+        <label>Gender (M/F/N)</label>
+        <InputText class="form-control" @bind-Value="Model.Gender" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Spremi</button>
+</EditForm>
+

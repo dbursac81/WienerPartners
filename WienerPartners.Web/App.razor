@@ -1,0 +1,10 @@
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(WienerPartners.Web.Shared.MainLayout)" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(WienerPartners.Web.Shared.MainLayout)">
+            <p>Stranica nije pronađena.</p>
+        </LayoutView>
+    </NotFound>
+</Router>

@@ -1,0 +1,68 @@
+@page "/"
+@inherits IndexBase
+
+<Shared.NavMenu />
+
+<div class="mb-3">
+    <a class="btn btn-success" href="/create-partner">Dodaj novog partnera</a>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Akt</th>
+            <th>FullName</th>
+            <th>PartnerNumber</th>
+            <th>PartnerType</th>
+            <th>CreatedAtUtc</th>
+            <th>PoliciesCount</th>
+            <th>PoliciesSum</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Partners is null)
+        {
+            <tr><td colspan="8">Učitavanje...</td></tr>
+        }
+        else
+        {
+            foreach (var p in Partners)
+            {
+                var mark = (p.PoliciesCount > 5 || p.PoliciesSum > 5000m) ? "*" : "";
+                var css = (p.Id == NewId) ? "highlight-new" : "";
+                <tr class="@css" style="cursor:pointer" @onclick="() => ShowDetails(p.Id)">
+                    <td>@mark</td>
+                    <td>@p.FullName</td>
+                    <td>@p.PartnerNumber</td>
+                    <td>@(p.PartnerTypeId==1?"Personal":"Legal")</td>
+                    <td>@p.CreatedAtUtc.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>@p.PoliciesCount</td>
+                    <td>@p.PoliciesSum</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" @onclick:stopPropagation="true" @onclick="() => OpenAddPolicy(p.Id)">Dodaj policu</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@if (SelectedPartner != null)
+{
+    <div>
+        <h5>Detalji partnera</h5>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>FullName:</strong> @SelectedPartner.FullName</li>
+            <li class="list-group-item"><strong>Address:</strong> @SelectedPartner.Address</li>
+            <li class="list-group-item"><strong>PartnerNumber:</strong> @SelectedPartner.PartnerNumber</li>
+            <li class="list-group-item"><strong>CreatedAtUtc:</strong> @SelectedPartner.CreatedAtUtc</li>
+            <li class="list-group-item"><strong>CreateByUser:</strong> @SelectedPartner.CreateByUser</li>
+            <li class="list-group-item"><strong>ExternalCode:</strong> @SelectedPartner.ExternalCode</li>
+            <li class="list-group-item"><strong>Gender:</strong> @SelectedPartner.Gender</li>
+            <li class="list-group-item"><strong>PoliciesCount:</strong> @SelectedPartner.PoliciesCount</li>
+            <li class="list-group-item"><strong>PoliciesSum:</strong> @SelectedPartner.PoliciesSum</li>
+        </ul>
+    </div>
+}
+
