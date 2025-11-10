@@ -2,44 +2,48 @@ using Microsoft.AspNetCore.Components;
 using WienerPartners.Core.Models;
 using WienerPartners.Data;
 
-namespace WienerPartners.Web.Pages
+namespace WienerPartners.Web.Pages;
+
+public class CreatePolicyBase : ComponentBase
 {
-    public class CreatePolicyBase : ComponentBase
+    [Parameter]
+    public int PartnerId { get; set; }
+
+    [Inject]
+    protected IPolicyRepository repo { get; set; } = default!;
+
+    [Inject]
+    protected IPartnerRepository partnerRepo { get; set; } = default!;
+
+    [Inject]
+    protected NavigationManager navigationManager { get; set; } = default!;
+
+    protected Policy Model = new Policy();
+
+    protected string FullName { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
     {
-        [Parameter] 
-        public int PartnerId { get; set; }
+        var policy = await repo.GetByPartnerIdAsync(PartnerId);
 
-        [Inject] 
-        protected IPartnerRepository Repo { get; set; } = default!;
+        var partner = await partnerRepo.GetByIdAsync(PartnerId);
+        if (partner != null)
+            FullName = partner.FullName;
+    }
 
-        [Inject] 
-        protected NavigationManager NavigationManager { get; set; } = default!;
+    protected override void OnInitialized()
+    {
+        Model.PartnerId = PartnerId;
+    }
 
-        protected Policy Model = new Policy();
+    protected async Task HandleValidSubmit()
+    {
+        await repo.CreateAsync(Model);
+        navigationManager.NavigateTo("/");
+    }
 
-        protected string FullName { get; set; } = string.Empty;
-
-        protected override async Task OnInitializedAsync()
-        {
-            var partner = await Repo.GetByIdAsync(PartnerId);
-            if (partner != null)
-                FullName = partner.FullName;
-        }
-
-        protected override void OnInitialized()
-        {
-            Model.PartnerId = PartnerId;
-        }
-
-        protected async Task HandleValidSubmit()
-        {
-            await Repo.CreatePolicyAsync(Model);
-            NavigationManager.NavigateTo("/");
-        }
-
-        protected void Cancel()
-        {
-            NavigationManager.NavigateTo("/");
-        }
+    protected void Cancel()
+    {
+        navigationManager.NavigateTo("/");
     }
 }

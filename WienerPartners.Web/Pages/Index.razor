@@ -17,7 +17,7 @@
             <th>Partner type</th>
             <th>Created</th>
             <th>Policies count</th>
-            <th>Policies sum</th>
+            <th>Policies total sum</th>
             <th></th>
         </tr>
     </thead>
@@ -52,22 +52,4 @@
 <PartnerDetailsModal Show="@ShowModal"
                      Partner="@SelectedPartner"
                      OnClose="@HideModal" />
-
-@* @if (SelectedPartner != null)
-{
-    <div>
-        <h5>Detalji partnera</h5>
-        <ul class="list-group">
-            <li class="list-group-item"><strong>FullName:</strong> @SelectedPartner.FullName</li>
-            <li class="list-group-item"><strong>Address:</strong> @SelectedPartner.Address</li>
-            <li class="list-group-item"><strong>PartnerNumber:</strong> @SelectedPartner.PartnerNumber</li>
-            <li class="list-group-item"><strong>CreatedAtUtc:</strong> @SelectedPartner.CreatedAtUtc</li>
-            <li class="list-group-item"><strong>CreateByUser:</strong> @SelectedPartner.CreateByUser</li>
-            <li class="list-group-item"><strong>ExternalCode:</strong> @SelectedPartner.ExternalCode</li>
-            <li class="list-group-item"><strong>Gender:</strong> @SelectedPartner.Gender</li>
-            <li class="list-group-item"><strong>PoliciesCount:</strong> @SelectedPartner.PoliciesCount</li>
-            <li class="list-group-item"><strong>PoliciesSum:</strong> @SelectedPartner.PoliciesSum</li>
-        </ul>
-    </div>
-} *@
 

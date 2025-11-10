@@ -5,20 +5,20 @@
 
 <h4>New policy for partner @FullName</h4>
 
-<EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="Model" OnValidSubmit="HandleValidSubmit" novalidate>
     <DataAnnotationsValidator />
     <ValidationSummary />
-    <div class="form-group">
+    <div class="form-group" style="width: 40%; margin-bottom:15px">
         <label>Policy number</label>
-        <InputText class="form-control" @bind-Value="Model.PolicyNumber" />
+        <InputText class="form-control" @bind-Value="Model.Number" minlength="10" maxlength="15" required />
     </div>
-    <div class="form-group">
+    <div class="form-group" style="width: 40%; margin-bottom:15px">
         <label>Policy amount</label>
-        <InputNumber class="form-control" @bind-Value="Model.PolicyAmount" />
+        <InputNumber class="form-control" @bind-Value="Model.Value" required />
     </div>
 
     <div class="form-group mt-3 text-right">
         <button style="margin-top:10px" class="btn btn-primary" type="submit">Save</button>
-        <button style="margin-top:10px" class="btn btn-secondary ml-2" @onclick="Cancel">Cancel</button>
+        <button style="margin-top:10px" class="btn btn-secondary ml-2" @onclick="Cancel">Close</button>
     </div>
 </EditForm>

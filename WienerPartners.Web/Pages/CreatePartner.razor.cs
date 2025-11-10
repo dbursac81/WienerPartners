@@ -2,34 +2,33 @@ using Microsoft.AspNetCore.Components;
 using WienerPartners.Core.Models;
 using WienerPartners.Data;
 
-namespace WienerPartners.Web.Pages
+namespace WienerPartners.Web.Pages;
+
+public class CreatePartnerBase : ComponentBase
 {
-    public class CreatePartnerBase : ComponentBase
+    [Inject] 
+    protected IPartnerRepository Repo { get; set; } = default!;
+
+    [Inject] 
+    protected NavigationManager NavigationManager { get; set; } = default!;
+
+    protected Partner Model = new Partner();
+
+    protected async Task HandleValidSubmit()
     {
-        [Inject] 
-        protected IPartnerRepository Repo { get; set; } = default!;
-
-        [Inject] 
-        protected NavigationManager NavigationManager { get; set; } = default!;
-
-        protected Partner Model = new Partner();
-
-        protected async Task HandleValidSubmit()
+        try
         {
-            try
-            {
-                var id = await Repo.CreateAsync(Model);
-                NavigationManager.NavigateTo($"/?newId={id}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            var id = await Repo.CreateAsync(Model);
+            NavigationManager.NavigateTo($"/?newId={id}");
         }
-
-        protected void Cancel()
+        catch (Exception ex)
         {
-            NavigationManager.NavigateTo("/");
+            Console.WriteLine(ex.Message);
         }
+    }
+
+    protected void Cancel()
+    {
+        NavigationManager.NavigateTo("/");
     }
 }
