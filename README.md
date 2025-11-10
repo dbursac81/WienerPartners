@@ -1,19 +1,67 @@
-WienerPartners - 3-project solution (Core, Data, Web)
+# 🧾 WienerPartners
 
-Projects:
-- WienerPartners.Core : models
-- WienerPartners.Data : Dapper repository (references Core)
-- WienerPartners.Web  : Blazor Server UI (references Core & Data)
+A **Blazor Server (.NET 7.0)** web application for managing insurance partners and their policies.  
+This project was built according to the provided technical and functional specification, using **C# / HTML / JS / T-SQL** with a **Dapper Micro ORM** data layer.
 
-How to run:
-1. Open solution with Visual Studio or run `dotnet build` in solution folder.
-2. Create DB WienerDB and run `WienerPartners.Data/sql/create_tables.sql`.
-3. From Web project folder:
-   dotnet restore
-   dotnet run
+---
 
-After running, open the app and test the features.
+	## 📁 Project Structure
 
-Note:
-- All Razor pages have code-behind files (.razor.cs)
-- Repositories use Dapper and set CreatedAtUtc server-side.
+The solution consists of **three projects**, following a clean architecture approach:
+
+WienerPartners.sln
+│
+├── WienerPartners.Blazor → Blazor Server web application (UI + pages)
+├── WienerPartners.Core → Business entities and core models
+└── WienerPartners.Data → Data access layer using Dapper
+
+
+	## ⚙️ Requirements
+
+- **.NET 7.0 SDK**
+- **SQL Server (Express or full)**
+- **Visual Studio 2022** or **VS Code**
+- **Bootstrap 4** (already included)
+- **Dapper** NuGet package
+
+
+	## 🧱 Database Setup
+
+1. Open a SQL Server database.
+2. Run the SQL script placed in WienerPartners.Data/sql folder.
+3. In appsettings.json of WienerPartners.Web, adjust your connection string if needed:
+	"ConnectionStrings": {
+		"DefaultConnection": "Server=localhost;Database=WienerDb;Integrated Security=True;TrustServerCertificate=true;"
+    }
+
+
+	## 🚀 Running the Application
+
+Open the solution in Visual Studio.
+Set WienerPartners.Web as the startup project.
+Press F5 to run the app.
+Navigate to https://localhost:5001
+
+
+	##🔒 Security and Validation
+
+Input data validated both on client (Blazor) and server side
+Proper data typing and length validation enforced
+UTC timestamps handled automatically on insert
+
+
+	## 🧩 Technologies Used
+
+.NET 7.0
+Blazor Server
+C# / Razor Pages
+Dapper ORM
+Bootstrap 4
+SQL Server (T-SQL)
+
+
+	##📦 Deployment Notes
+
+Deploy via IIS or Docker (standard Blazor Server setup)
+Database name must remain WienerDb
+Connection string in appsettings.json must be configured for the target environment
