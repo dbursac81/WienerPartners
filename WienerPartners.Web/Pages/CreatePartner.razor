@@ -3,54 +3,63 @@
 
 <Shared.NavMenu />
 
-<h4>Unos novog partnera</h4>
+<h4>New partner</h4>
 
 <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <div class="form-group">
-        <label>FirstName</label>
-        <InputText class="form-control" @bind-Value="Model.FirstName" />
+        <label>First name</label>
+        <InputText class="form-control" @bind-Value="Model.FirstName" minlength="2" maxlength="255" required />
     </div>
     <div class="form-group">
-        <label>LastName</label>
-        <InputText class="form-control" @bind-Value="Model.LastName" />
+        <label>Last name</label>
+        <InputText class="form-control" @bind-Value="Model.LastName" minlength="2" maxlength="255" required />
     </div>
     <div class="form-group">
         <label>Address</label>
-        <InputText class="form-control" @bind-Value="Model.Address" />
+        <InputText class="form-control" @bind-Value="Model.Address" maxlength="255" />
     </div>
     <div class="form-group">
-        <label>PartnerNumber (20 digits)</label>
-        <InputText class="form-control" @bind-Value="Model.PartnerNumber" />
+        <label>Partner number (max. 20 digits)</label>
+        <InputText class="form-control" @bind-Value="Model.PartnerNumber" pattern="\d{20}" required />
     </div>
     <div class="form-group">
-        <label>CroatianPIN (OIB)</label>
-        <InputText class="form-control" @bind-Value="Model.CroatianPIN" />
+        <label>OIB</label>
+        <InputText class="form-control" @bind-Value="Model.CroatianPIN" maxlength="11" />
     </div>
     <div class="form-group">
-        <label>PartnerTypeId</label>
-        <InputNumber class="form-control" @bind-Value="Model.PartnerTypeId" />
-        <small>1 - Personal, 2 - Legal</small>
+        <label>Partner type</label>
+        <select class="form-control" @bind="Model.PartnerTypeId">
+            <option value="1">Personal</option>
+            <option value="2">Legal</option>
+        </select>
     </div>
     <div class="form-group">
-        <label>CreateByUser (email)</label>
-        <InputText class="form-control" @bind-Value="Model.CreateByUser" />
+        <label>Created by user (email)</label>
+        <InputText class="form-control" type="email" @bind-Value="Model.CreateByUser" maxlength="255" required />
     </div>
     <div class="form-group form-check">
         <InputCheckbox class="form-check-input" @bind-Value="Model.IsForeign" />
-        <label class="form-check-label">IsForeign</label>
+        <label class="form-check-label">Is foreign</label>
     </div>
     <div class="form-group">
-        <label>ExternalCode</label>
-        <InputText class="form-control" @bind-Value="Model.ExternalCode" />
+        <label>External code</label>
+        <InputText class="form-control" @bind-Value="Model.ExternalCode" minlength="10" maxlength="20" required />
     </div>
     <div class="form-group">
         <label>Gender (M/F/N)</label>
-        <InputText class="form-control" @bind-Value="Model.Gender" />
+        <select class="form-control" @bind="Model.Gender">
+            <option value="M">M</option>
+            <option value="F">F</option>
+            <option value="N">N</option>
+        </select>
     </div>
-
-    <button class="btn btn-primary" type="submit">Spremi</button>
+        
+    <div class="form-group mt-3 text-right">
+        <button style="margin-top:10px" class="btn btn-primary" type="submit">Save</button>
+        <button style="margin-top:10px" class="btn btn-secondary ml-2" @onclick="Cancel">Cancel</button>
+    </div>
 </EditForm>
 

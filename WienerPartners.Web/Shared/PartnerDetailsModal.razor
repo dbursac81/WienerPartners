@@ -1,0 +1,50 @@
+﻿@using WienerPartners.Core.Models
+
+<div class="modal fade @(Show ? "show d-block" : "")" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalji partnera - @Partner?.FullName</h5>
+                <button type="button" class="close" @onclick="OnCloseClicked" aria-label="Zatvori">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (Partner is not null)
+                {
+                    <table class="table table-sm">
+                        <tbody>
+                            <tr><th>FullName</th><td>@Partner.FullName</td></tr>
+                            <tr><th>Address</th><td>@Partner.Address</td></tr>
+                            <tr><th>PartnerNumber</th><td>@Partner.PartnerNumber</td></tr>
+                            <tr><th>OIB</th><td>@Partner.CroatianPIN</td></tr>
+                            <tr><th>PartnerType</th><td>@(Partner.PartnerTypeId == 1 ? "Personal" : "Legal")</td></tr>
+                            <tr><th>CreatedBy</th><td>@Partner.CreateByUser</td></tr>
+                            <tr><th>CreatedAt</th><td>@Partner.CreatedAtUtc.ToLocalTime()</td></tr>
+                            <tr><th>IsForeign</th><td>@(Partner.IsForeign ? "Da" : "Ne")</td></tr>
+                            <tr><th>ExternalCode</th><td>@Partner.ExternalCode</td></tr>
+                            <tr><th>Gender</th><td>@Partner.Gender</td></tr>
+                            <tr><th>Broj polica</th><td>@Partner.PoliciesCount</td></tr>
+                            <tr><th>Ukupni iznos polica</th><td>@Partner.PoliciesSum kn</td></tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" @onclick="OnCloseClicked">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Partner? Partner { get; set; }
+    [Parameter] public bool Show { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private async Task OnCloseClicked()
+    {
+        Show = false;
+        await OnClose.InvokeAsync();
+    }
+}

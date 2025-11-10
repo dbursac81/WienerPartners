@@ -1,23 +1,24 @@
 @page "/"
+@using WienerPartners.Web.Shared
 @inherits IndexBase
 
 <Shared.NavMenu />
 
 <div class="mb-3">
-    <a class="btn btn-success" href="/create-partner">Dodaj novog partnera</a>
+    <a class="btn btn-success" href="/create-partner">New partner</a>
 </div>
 
-<table class="table table-hover">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Akt</th>
-            <th>FullName</th>
-            <th>PartnerNumber</th>
-            <th>PartnerType</th>
-            <th>CreatedAtUtc</th>
-            <th>PoliciesCount</th>
-            <th>PoliciesSum</th>
-            <th>Akcije</th>
+            <th></th>
+            <th>Full name</th>
+            <th>Partner number</th>
+            <th>Partner type</th>
+            <th>Created</th>
+            <th>Policies count</th>
+            <th>Policies sum</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -40,7 +41,7 @@
                     <td>@p.PoliciesCount</td>
                     <td>@p.PoliciesSum</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" @onclick:stopPropagation="true" @onclick="() => OpenAddPolicy(p.Id)">Dodaj policu</button>
+                        <button class="btn btn-sm btn-primary" @onclick:stopPropagation="true" @onclick="() => OpenAddPolicy(p.Id)">New policy</button>
                     </td>
                 </tr>
             }
@@ -48,7 +49,11 @@
     </tbody>
 </table>
 
-@if (SelectedPartner != null)
+<PartnerDetailsModal Show="@ShowModal"
+                     Partner="@SelectedPartner"
+                     OnClose="@HideModal" />
+
+@* @if (SelectedPartner != null)
 {
     <div>
         <h5>Detalji partnera</h5>
@@ -64,5 +69,5 @@
             <li class="list-group-item"><strong>PoliciesSum:</strong> @SelectedPartner.PoliciesSum</li>
         </ul>
     </div>
-}
+} *@
 

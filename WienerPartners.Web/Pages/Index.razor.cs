@@ -1,20 +1,22 @@
 using Microsoft.AspNetCore.Components;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using WienerPartners.Core.Models;
 using WienerPartners.Data;
-using System.Linq;
 
 namespace WienerPartners.Web.Pages
 {
     public class IndexBase : ComponentBase
     {
-        [Inject] protected IPartnerRepository Repo { get; set; } = default!;
-        [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
+        [Inject]
+        protected IPartnerRepository Repo { get; set; } = default!;
+
+        [Inject]
+        protected NavigationManager NavigationManager { get; set; } = default!;
 
         protected List<Partner>? Partners;
         protected Partner? SelectedPartner;
         protected int? NewId;
+
+        protected bool ShowModal { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -35,6 +37,11 @@ namespace WienerPartners.Web.Pages
         {
             SelectedPartner = await Repo.GetByIdAsync(id);
             StateHasChanged();
+        }
+
+        protected void HideModal()
+        {
+            ShowModal = false;
         }
 
         protected void OpenAddPolicy(int partnerId)

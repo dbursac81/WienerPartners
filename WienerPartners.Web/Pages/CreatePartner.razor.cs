@@ -1,17 +1,18 @@
 using Microsoft.AspNetCore.Components;
-using System.Threading.Tasks;
 using WienerPartners.Core.Models;
 using WienerPartners.Data;
-using System;
 
 namespace WienerPartners.Web.Pages
 {
     public class CreatePartnerBase : ComponentBase
     {
-        [Inject] protected IPartnerRepository Repo { get; set; } = default!;
-        [Inject] protected NavigationManager NavigationManager { get; set; } = default!;
+        [Inject] 
+        protected IPartnerRepository Repo { get; set; } = default!;
 
-        protected Partner Model = new Partner { PartnerTypeId = 1, Gender = "N" };
+        [Inject] 
+        protected NavigationManager NavigationManager { get; set; } = default!;
+
+        protected Partner Model = new Partner();
 
         protected async Task HandleValidSubmit()
         {
@@ -24,6 +25,11 @@ namespace WienerPartners.Web.Pages
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        protected void Cancel()
+        {
+            NavigationManager.NavigateTo("/");
         }
     }
 }

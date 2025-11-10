@@ -3,19 +3,22 @@
 
 <Shared.NavMenu />
 
-<h4>Unos nove police za partnera @PartnerId</h4>
+<h4>New policy for partner @FullName</h4>
 
 <EditForm Model="Model" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="form-group">
-        <label>Broj police</label>
+        <label>Policy number</label>
         <InputText class="form-control" @bind-Value="Model.PolicyNumber" />
     </div>
     <div class="form-group">
-        <label>Iznos police</label>
+        <label>Policy amount</label>
         <InputNumber class="form-control" @bind-Value="Model.PolicyAmount" />
     </div>
 
-    <button class="btn btn-primary" type="submit">Spremi policu</button>
+    <div class="form-group mt-3 text-right">
+        <button style="margin-top:10px" class="btn btn-primary" type="submit">Save</button>
+        <button style="margin-top:10px" class="btn btn-secondary ml-2" @onclick="Cancel">Cancel</button>
+    </div>
 </EditForm>
